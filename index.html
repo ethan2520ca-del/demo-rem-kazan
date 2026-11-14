@@ -2,7 +2,6 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="robots" content="noindex, nofollow" data-publish>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Rem-kazan · Ремонт квартир</title>
 <meta name="description" content="Работаем по графику: план по неделям, фотоотчёт каждые 7 дней, оплата по этапам после приёмки.">
@@ -19,6 +18,39 @@
 :root { --c-canvas: #f2eee6; --c-surface: #fbf9f4; --c-ink: #1c1a17; --c-ink-soft: #6b665d; --c-accent: #b04f16; --c-accent-ink: #fff4ea; --c-accent-deep: #b04f16; --f-display: "Wix Madefor Display", "Segoe UI", system-ui, sans-serif; --f-text: "Golos Text", "Segoe UI", system-ui, sans-serif; --h1k: 1; }
 </style>
 <link rel="stylesheet" href="style-prod.css">
+<style id="hero-fix">
+/* hero-fix: первый экран = фото + заголовок + подзаголовок + кнопки */
+body{overflow-x:clip}
+.s-hero{position:relative!important;display:flex!important;align-items:center!important;
+  grid-template-columns:none!important;width:100vw!important;margin-left:calc(50% - 50vw)!important;
+  margin-right:calc(50% - 50vw)!important;min-height:calc(100svh - 68px)!important;
+  padding:clamp(20px,4vh,44px) 0!important;gap:0!important;border-radius:0!important;
+  background:#16161b var(--hero-bg) 50% 50%/cover no-repeat!important;color:#fff!important;overflow:hidden}
+.s-hero::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(8,8,12,.88) 0%,rgba(8,8,12,.62) 36%,rgba(8,8,12,.22) 66%,rgba(8,8,12,.05) 100%),
+    linear-gradient(rgba(8,8,12,.34),rgba(8,8,12,.34))}
+.s-hero__text{position:relative;z-index:1;max-width:none;margin:0;
+  padding-left:max(var(--gut),calc((100vw - 1180px)/2 + var(--gut)));padding-right:var(--gut)}
+.s-hero__text>*:first-child{margin-top:0}
+.s-hero h1{color:#fff!important;font-size:calc(clamp(1.95rem,4vw,3.35rem) * var(--h1k,1))!important;
+  line-height:1.08!important;max-width:24ch;hyphens:none!important;text-wrap:pretty;
+  text-shadow:0 1px 18px rgba(0,0,0,.35)}
+.s-hero .s-lead{color:rgba(255,255,255,.92)!important;margin-top:18px;max-width:34ch;font-size:1.04rem;
+  text-shadow:0 1px 14px rgba(0,0,0,.4)}
+.s-hero .s-actions{margin-top:26px}
+.s-hero .s-link{color:#fff!important;border-bottom-color:rgba(255,255,255,.55)!important}
+.s-hero .s-eyebrow,.s-hero__img,.s-hero__photo,.s-hero__widget,.s-hero .s-ticks,.s-hero .s-rating{display:none!important}
+.s-section--widget{padding-top:clamp(32px,5vw,56px)}
+@media (max-width:820px){
+  .s-hero{min-height:calc(100svh - 64px)!important}
+  .s-hero__text{max-width:100%;padding:0 20px}
+  .s-hero h1{max-width:16ch;font-size:calc(clamp(1.7rem,7vw,2.4rem) * var(--h1k,1))!important}
+  .s-hero .s-actions{gap:14px 18px;flex-wrap:wrap;margin-top:22px}
+  .s-hero .s-btn{padding:0 1.15em;font-size:.92rem}
+  .s-hero .s-link{font-size:.95rem}
+  .s-hero::before{background:linear-gradient(180deg,rgba(8,8,12,.55) 0%,rgba(8,8,12,.62) 45%,rgba(8,8,12,.82) 100%)}
+}
+</style>
 </head>
 <body class="s-prod" id="top" data-wa="" data-tg="" data-max="">
 <header class="s-bar" data-s-bar>
@@ -31,14 +63,14 @@
 <main>
   <section class="s-hero">
     <div class="s-hero__text">
-      <p class="s-eyebrow">Ремонт квартир · Казань</p>
       <h1>Ремонт квартир в Казани – смета не растёт после подписания</h1>
       <p class="s-lead">Работаем по графику: план по неделям, фотоотчёт каждые 7 дней, оплата по этапам после приёмки.</p>
-      <ul class="s-ticks"><li>Смета в договоре – сумма не растёт</li><li>Фотоотчёт с площадки каждые 7 дней</li><li>Уборка после каждого этапа</li></ul>
-      <p class="s-rating"><b>4,3</b> на Яндекс.Картах · 5 отзывов</p>
-      <figure class="s-hero__photo"><img class="" src="assets/room-after.webp" alt="Комната после чистовой отделки" loading="lazy" decoding="async"></figure>
+      <div class="s-actions"><a class="s-btn" href="#widget">Записаться</a><a class="s-link" href="#prices">Цены и услуги</a></div>
     </div>
-    <div class="s-hero__widget" id="widget"><form class="s-widget" data-s-calc data-base="0" data-min="0" data-min-note="минимальный заказ" data-per="{&quot;type&quot;:&quot;area&quot;}" data-message="Здравствуйте! Хочу рассчитать ремонт: {выбор}. Предварительно {итого} за работы, без материалов. Когда можно на осмотр?" onsubmit="return false">
+  </section>
+
+  <section class="s-section s-section--widget" id="widget">
+<form class="s-widget" data-s-calc data-base="0" data-min="0" data-min-note="минимальный заказ" data-per="{&quot;type&quot;:&quot;area&quot;}" data-message="Здравствуйте! Хочу рассчитать ремонт: {выбор}. Предварительно {итого} за работы, без материалов. Когда можно на осмотр?" onsubmit="return false">
       <h2 class="s-widget__title">Рассчитать ремонт</h2>
       <div class="s-range"><label for="f-area"><span>Площадь квартиры</span><b><output data-s-out="area">55</output> м²</b></label>
       <input id="f-area" type="range" name="area" min="20" max="150" step="5" value="55" data-price="0" data-label="Площадь" data-unit="м²"></div>
@@ -51,9 +83,9 @@
       </div>
       <p class="s-send__note" data-s-copied hidden>Текст скопирован – вставьте его в чат.</p>
       <p class="s-demo">Цены для примера. В вашем сайте будут ваши.</p>
-    </form></div>
-    <figure class="s-hero__bg" aria-hidden="true"><img class="" src="assets/room-after.webp" alt="Комната после чистовой отделки" decoding="async" fetchpriority="high"></figure>
+    </form>
   </section>
+
 
   <section class="s-section s-reveal">
     <header class="s-section__head"><h2>Что входит в работу</h2></header>
